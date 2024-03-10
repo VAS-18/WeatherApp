@@ -14,24 +14,15 @@ export const WeatherBox = () => {
   const searchLocation = async (event) => {
     try {
       if (event.key === "Enter") {
-        await axios.g
+        await axios.get(URL).then((response)=>{
+          setData(response.data)
+        })
       }
-
-      
     } catch (error) {
-      
+      if (error.response.status === 400) {
+        alert("Sajil Randi");
+      }
     }
-  //   if (event.key === "Enter") {
-  //     if(city === ""){
-  //       alert("Sahil Randi")
-  //   } else{
-  //     await axios.get(URL).then((response) => {
-  //       setData(response.data).then(
-  //         city ? data.name : alert("not a city")
-  //       );
-  //     });
-  //   }
-  // }
   };
 
   let currentWeather = data.weather ? data.weather[0].main : null;
