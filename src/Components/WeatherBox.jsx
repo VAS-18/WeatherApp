@@ -1,7 +1,9 @@
-
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
+// import { ToastContainer, toast , Toaster } from "react-toastify";
+import { Toaster, toast } from "sonner";
+import "react-toastify/dist/ReactToastify.css";
 
 export const WeatherBox = () => {
   let API_KEY = "b725531af1851c6c18db30cbaf97493e";
@@ -14,24 +16,26 @@ export const WeatherBox = () => {
   const searchLocation = async (event) => {
     try {
       if (event.key === "Enter") {
-        await axios.get(URL).then((response)=>{
-          setData(response.data)
-        })
+        await axios.get(URL).then((response) => {
+          setData(response.data);
+        });
       }
     } catch (error) {
       if (error.response.status === 400) {
-        alert("Sajil Randi");
+        toast.warning("🤔 Enter A city Maybe?");
+      }
+      if (error.response.status === 404) {
+        toast.error("Maybe there is a typo?🤓");
       }
     }
   };
-
   let currentWeather = data.weather ? data.weather[0].main : null;
-  
+
   useEffect(() => {
     console.log(currentWeather);
-    setVid(`/Videos/${currentWeather}.mp4`)
+    setVid(`/Videos/${currentWeather}.mp4`);
   }, [data.weather]);
-  
+
   return (
     <div className="Top">
       <div className="Video flex flex-col overflow-hidden">
@@ -93,13 +97,13 @@ export const WeatherBox = () => {
         </div>
       </div>
       <div className="text-3xl  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[-50px] text-white">
-          <div className="">
-            <h2 className="Location transition-opacity duration-3000">
-              {currentWeather}
-            </h2>
-          </div>
-        </div>
+        <h2 className="Location transition-opacity duration-3000">
+          {currentWeather}
+        </h2>
+        <div></div>
+      </div>
+      {/* <ToastContainer /> */}
+      <Toaster richColors position="top-right" />
     </div>
-    
   );
 };
