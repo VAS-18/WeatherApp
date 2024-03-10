@@ -12,11 +12,26 @@ export const WeatherBox = () => {
   let URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=Metric&appid=${API_KEY}`;
 
   const searchLocation = async (event) => {
-    if (event.key === "Enter") {
-      await axios.get(URL).then((response) => {
-        setData(response.data);
-      });
+    try {
+      if (event.key === "Enter") {
+        await axios.g
+      }
+
+      
+    } catch (error) {
+      
     }
+  //   if (event.key === "Enter") {
+  //     if(city === ""){
+  //       alert("Sahil Randi")
+  //   } else{
+  //     await axios.get(URL).then((response) => {
+  //       setData(response.data).then(
+  //         city ? data.name : alert("not a city")
+  //       );
+  //     });
+  //   }
+  // }
   };
 
   let currentWeather = data.weather ? data.weather[0].main : null;
@@ -48,7 +63,7 @@ export const WeatherBox = () => {
         <div className="text-5xl font-extrabold absolute top-1/2 left-1/2 transform -translate-x-[800px] -translate-y-10 text-white">
           <div className="">
             <h2 className="Location transition-opacity duration-3000">
-              {data.name}{}
+              {data.name}
             </h2>
           </div>
         </div>
